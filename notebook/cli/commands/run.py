@@ -1,5 +1,3 @@
-# pylint:disable=duplicate-code, unused-argument
-
 """CLI 'run' command"""
 
 import click
@@ -11,20 +9,20 @@ from .root import notebook
 
 
 @notebook.command("run", short_help="Run the notebook")
-@click.pass_context
 @click.argument("path", type=click.Path(exists=True))
 @click.option(
     "--format",
     "-f",
+    "format_",
     type=click.STRING,
     help="What format you want to convert your notebook into. Supported formats: PDF",
 )
-def run(ctx, path, notebook_format):
+def run(path, format_):
     """Run a notebook or all notebooks in a directory"""
 
     path_list = get_list_of_paths(path)
 
     run_notebook(path_list)
 
-    if notebook_format:
-        convert_notebook(path_list, notebook_format)
+    if format_:
+        convert_notebook(path_list, format_)
