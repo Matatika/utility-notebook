@@ -4,7 +4,7 @@ with open("requirements.txt") as f:
     required = f.read().splitlines()
 
 setup(
-    name="notebook",
+    name="matatika-notebook",
     version="0.1.0",
     description="A Meltano utility plugin for running and converting Jupyter notebooks.",
     author="DanielPDWalker",
