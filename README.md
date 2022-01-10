@@ -1,3 +1,4 @@
+<a href="https://github.com/Matatika/notebook/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/Matatika/notebook"></a>
 # notebook
 Meltano utility plugin for running and converting Jupyter notebooks.
 
