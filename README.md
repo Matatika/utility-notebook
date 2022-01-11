@@ -2,6 +2,11 @@
 # notebook
 Meltano utility plugin for running and converting Jupyter notebooks.
 
+### System Requirements:
+
+- `pandoc`
+- `texlive-xetex`
+
 # Usage
 
 Can be pip installed and used as a python cli package.
