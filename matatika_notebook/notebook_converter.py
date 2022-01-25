@@ -6,7 +6,11 @@ import click
 from nbconvert import PDFExporter
 from traitlets.config import Config
 
-from .utils import get_file_name_no_ext, get_file_name_with_ext, get_file_extension
+from matatika_notebook.utils import (
+    get_file_name_no_ext,
+    get_file_name_with_ext,
+    get_file_extension,
+)
 
 
 def convert_notebook(path_list, notebook_format):

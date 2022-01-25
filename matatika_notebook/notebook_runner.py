@@ -3,7 +3,7 @@ from nbconvert.preprocessors import ExecutePreprocessor
 import nbformat
 import click
 
-from .utils import get_file_extension, get_file_name_with_ext
+from matatika_notebook.utils import get_file_extension, get_file_name_with_ext
 
 
 def run_notebook(path_list):
