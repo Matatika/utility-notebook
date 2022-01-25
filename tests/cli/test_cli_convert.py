@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from click.testing import CliRunner
 from tests.cli.test_utils import clean_up_converted_test_files, pdf_file_list
-from notebook.cli.commands.root import notebook
+from matatika_notebook.cli.commands.root import notebook
 
 
 class TestConvert(unittest.TestCase):
@@ -40,7 +40,7 @@ class TestConvert(unittest.TestCase):
         result = self.runner.invoke(
             notebook, ["convert", str(self.notebook_path), "-f"]
         )
-        self.assertIn("Error: Option '-f' requires an argument.", result.output)
+        self.assertIn("Error: -f option requires an argument", result.output)
         self.assertIs(result.exit_code, 2)
 
     def test_convert_with_incorrect_file_type(self):

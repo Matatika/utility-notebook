@@ -11,7 +11,7 @@ setup(
     url="https://www.matatika.com/",
     entry_points="""
         [console_scripts]
-        notebook=notebook.cli.commands.root:notebook
+        notebook=matatika_notebook.cli.commands.root:notebook
     """,
     license="MIT",
     install_requires=required,

@@ -3,7 +3,7 @@
 import unittest
 from pathlib import Path
 from click.testing import CliRunner
-from notebook.cli.commands.root import notebook
+from matatika_notebook.cli.commands.root import notebook
 from tests.cli.test_utils import clean_up_converted_test_files, pdf_file_list
 
 

@@ -2,8 +2,8 @@
 
 import click
 
-from notebook.notebook_installer import install_requirements
-from .root import notebook
+from matatika_notebook.notebook_installer import install_requirements
+from matatika_notebook.cli.commands.root import notebook
 
 
 @notebook.command(
