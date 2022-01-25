@@ -1,4 +1,4 @@
-"""Modue for converting jupyter notebooks"""
+"""Module for converting jupyter notebooks"""
 
 import os
 
