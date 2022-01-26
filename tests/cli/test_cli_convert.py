@@ -76,3 +76,69 @@ class TestConvert(unittest.TestCase):
         for file in pdf_file_list:
             pdf_path = self.notebook_dir_path.joinpath(file)
             self.assertTrue(pdf_path.is_file())
+
+    def test_convert_config(self):
+        """Test notebook convert on single notebook"""
+        result = self.runner.invoke(
+            notebook,
+            [
+                "convert",
+                str(self.notebook_path),
+                "-f",
+                "pdf",
+                "-c",
+                '{"TemplateExporter": {"exclude_output_prompt": true, "exclude_input": true, "exclude_input_prompt": true}}',
+            ],
+        )
+        self.assertIn("Converted file: ", result.output)
+        self.assertIs(result.exit_code, 0)
+        pdf_path = self.test_files_path.joinpath("test_notebook.pdf")
+        self.assertTrue(pdf_path.is_file())
+
+    def test_convert_config(self):
+        """Test notebook convert on single notebook"""
+        result = self.runner.invoke(
+            notebook,
+            [
+                "convert",
+                str(self.notebook_path),
+                "-f",
+                "pdf",
+                "-c",
+                '{"TemplateExporter": {"exclude_output_prompt": true, "exclude_input": true, "exclude_input_prompt": true}}',
+            ],
+        )
+        self.assertIn("Converted file: ", result.output)
+        self.assertIs(result.exit_code, 0)
+        pdf_path = self.test_files_path.joinpath("test_notebook.pdf")
+        self.assertTrue(pdf_path.is_file())
+
+    def test_convert_config_with_config_flag_no_config(self):
+        """Test notebook convert on single notebook with format flag but no format"""
+        result = self.runner.invoke(
+            notebook, ["convert", str(self.notebook_path), "-f", "pdf", "-c"]
+        )
+        self.assertIn(
+            "Error: Option '-c' requires an argument.",
+            result.output,
+        )
+        self.assertIs(result.exit_code, 2)
+
+    def test_convert_config_with_config_flag_incorrect_config(self):
+        """Test notebook convert on single notebook with format flag but no format"""
+        result = self.runner.invoke(
+            notebook,
+            [
+                "convert",
+                str(self.notebook_path),
+                "-f",
+                "pdf",
+                "-c",
+                "sdhfusidhf894rioj3jf892oisd",
+            ],
+        )
+        self.assertIn(
+            "Config setting supplied in incorrect format. Expected either a preset config: no-code, or a JSON object of settings as a string.",
+            result.output,
+        )
+        self.assertIs(result.exit_code, 1)
