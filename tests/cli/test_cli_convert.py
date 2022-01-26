@@ -40,7 +40,7 @@ class TestConvert(unittest.TestCase):
         result = self.runner.invoke(
             notebook, ["convert", str(self.notebook_path), "-f"]
         )
-        self.assertIn("Error: Option '-f' requires an argument.", result.output)
+        self.assertIn("Error: -f option requires an argument", result.output)
         self.assertIs(result.exit_code, 2)
 
     def test_convert_with_incorrect_file_type(self):
@@ -119,7 +119,7 @@ class TestConvert(unittest.TestCase):
             notebook, ["convert", str(self.notebook_path), "-f", "pdf", "-c"]
         )
         self.assertIn(
-            "Error: Option '-c' requires an argument.",
+            "Error: -c option requires an argument",
             result.output,
         )
         self.assertIs(result.exit_code, 2)
