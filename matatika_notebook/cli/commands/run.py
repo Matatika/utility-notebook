@@ -18,7 +18,15 @@ from .root import notebook
     type=click.STRING,
     help="What format you want to convert your notebook into. Supported formats: PDF",
 )
-def run(path, format_):
+@click.option(
+    "--config",
+    "-c",
+    "config_",
+    type=click.STRING,
+    default=None,
+    help="What config to use when converting your notebook. Configurable formats: PDF",
+)
+def run(path, format_, config_):
     """Run a notebook or all notebooks in a directory"""
 
     path_list = get_list_of_paths(path)
@@ -26,4 +34,4 @@ def run(path, format_):
     run_notebook(path_list)
 
     if format_:
-        convert_notebook(path_list, format_)
+        convert_notebook(path_list, format_, config_)

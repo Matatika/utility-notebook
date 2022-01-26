@@ -4,7 +4,7 @@ import os
 
 import click
 from nbconvert import PDFExporter
-from traitlets.config import Config
+
 
 from matatika_notebook.utils import (
     get_file_name_no_ext,
@@ -12,15 +12,17 @@ from matatika_notebook.utils import (
     get_file_extension,
 )
 
+from matatika_notebook.pdf_format_settings import pdf_config_setup
 
-def convert_notebook(path_list, notebook_format):
+
+def convert_notebook(path_list, notebook_format, config):
     """Convert all notebooks in the path list"""
     for path in path_list:
         nb_filename_with_ext = get_file_name_with_ext(path)
         file_extension = get_file_extension(path)
         if file_extension == ".ipynb":
             if notebook_format == "pdf":
-                convert_to_pdf(path)
+                convert_to_pdf(path, config)
         else:
             click.secho(
                 f"Skipped file: {nb_filename_with_ext}. Incorrect file type",
@@ -31,11 +33,8 @@ def convert_notebook(path_list, notebook_format):
 def convert_config(config, notebook_format):
     """Handles the converted files config"""
     if notebook_format == "pdf":
-        config = Config()
-        config.TemplateExporter.exclude_output_prompt = True
-        config.TemplateExporter.exclude_input = True
-        config.TemplateExporter.exclude_input_prompt = True
-        return PDFExporter(config=config)
+        pdf_config = pdf_config_setup(config)
+        return PDFExporter(config=pdf_config)
     return None
 
 
@@ -56,7 +55,7 @@ def save_converted_notebook(path, body, notebook_format):
         file.write(body)
 
 
-def convert_to_pdf(path):
+def convert_to_pdf(path, config):
     """Handles converting notebook to pdf"""
     nb_filename_with_ext = get_file_name_with_ext(path)
 
@@ -65,7 +64,7 @@ def convert_to_pdf(path):
         fg="white",
     )
 
-    pdf_exporter = convert_config(None, "pdf")
+    pdf_exporter = convert_config(config, "pdf")
 
     (body, _) = pdf_exporter.from_filename(path)
 

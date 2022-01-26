@@ -22,13 +22,21 @@ from matatika_notebook.cli.commands.root import notebook
     type=click.STRING,
     help="What format you want to convert your notebook into. Supported formats: PDF",
 )
-def convert(path, format_):
+@click.option(
+    "--config",
+    "-c",
+    "config_",
+    type=click.STRING,
+    default=None,
+    help="What config to use when converting your notebook. Configurable formats: PDF",
+)
+def convert(path, format_, config_):
     """Convert a notebook or all notebooks in a directory"""
 
     if format_:
         path_list = get_list_of_paths(path)
 
-        convert_notebook(path_list, format_)
+        convert_notebook(path_list, format_, config_)
     else:
         click.secho("No format provided for conversion.", fg="red")
         sys.exit(2)
