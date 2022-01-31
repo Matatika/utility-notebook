@@ -25,7 +25,6 @@ class TestConvert(unittest.TestCase):
     def test_convert_with_no_file_path(self):
         """Test notebook convert with no file path provided"""
         result = self.runner.invoke(notebook, ["convert"])
-        print(result.output)
         self.assertIn("Error: Missing argument 'PATH'", result.output)
         self.assertIs(result.exit_code, 2)
 
@@ -49,7 +48,6 @@ class TestConvert(unittest.TestCase):
         result = self.runner.invoke(
             notebook, ["convert", str(text_file_path), "-f", "pdf"]
         )
-        print(result.output)
         self.assertIn("Skipped file:", result.output)
 
     def test_convert(self):

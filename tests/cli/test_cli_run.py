@@ -27,14 +27,12 @@ class TestRun(unittest.TestCase):
     def test_run_with_no_file_path(self):
         """Test notebook run with no file path provided"""
         result = self.runner.invoke(notebook, ["run"])
-        print(result.output)
         self.assertIn("Error: Missing argument 'PATH'", result.output)
         self.assertIs(result.exit_code, 2)
 
     def test_run_with_incorrect_file_type(self):
         """Test notebook run with incorrect file type"""
         result = self.runner.invoke(notebook, ["run", str(self.text_file_path)])
-        print(result.output)
         self.assertIn("Skipped file:", result.output)
 
     def test_run(self):
